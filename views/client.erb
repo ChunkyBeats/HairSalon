@@ -1,0 +1,27 @@
+<h3>Here is the client's information:</h3>
+
+<ul>
+  <li>Name: <%= @client.client_name %></li>
+  <li>Stylist: <%= @client.stylist_id %></li>
+</ul>
+
+<p>Would you like to do any of the following?</p>
+
+<p>Update <%= @client.client_name %>'s name</p>
+<form action = '/client/<%= @client.id %>' method="post">
+  <input name="_method" type="hidden" value="patch">
+  <input name="client_id" id="client_id" type="hidden" value="<%= @client.id %>">
+  <div class="form-group">
+    <input id="name" name="name" type="text">
+  </div>
+  <button type="submit" class="btn-success">Update Name</button>
+</form>
+
+
+<p></p>
+<p>OR</p>
+<form action ='/clients' method="post">
+  <input name="_method" type="hidden" value="delete">
+  <input name="client_id" id="client_id" type="hidden" value="<%= @client.id()%>">
+  <button class="btn-success" type="submit">Delete <%= @client.client_name %></a></button>
+</form>

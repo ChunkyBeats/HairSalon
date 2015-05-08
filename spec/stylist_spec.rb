@@ -64,10 +64,10 @@ describe Stylist do
     it('returns the list of clients assigned to a stylist') do
       stylist = Stylist.new(stylist_name: "Snip Snip")
       stylist.save
-      client = Client.new(client_name: "Anita Haircut", stylist_id: stylist.id)
+      client = Client.new(client_name: "Anita Haircut")
       client.save
       client.assign_stylist(stylist)
-      expect(stylist.clients).to(eq([client]))
+      expect(stylist.clients).to(eq([client.client_name]))
     end
   end
 

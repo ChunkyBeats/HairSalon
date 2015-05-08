@@ -19,6 +19,16 @@ class Client
     returned_clients
   end
 
+  def self.find(id)
+    found_client = nil
+    Client.all.each do |client|
+      if client.id.==(id)
+        found_client = client
+      end
+    end
+    found_client
+  end
+
   def save
     client = DB.exec("INSERT INTO clients (client_name) VALUES ('#{@client_name}') RETURNING id;")
     @id = client.first.fetch("id").to_i

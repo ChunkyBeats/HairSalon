@@ -1,13 +1,40 @@
-<h3><%= #{@stylist.stylist_name} %> has these clients:</h3>
+<h3>These are their clients: </h3>
 
-<% if @stylists.clients.any? %>
+<% if @stylist.clients.any? %>
   <ul>
-      <% @stylist.clients.each do |clientt| %>
-        <li><%= client.client_name %></li>
-      <% end %>
+    <% @stylist.clients.each do |client| %>
+      <li><%= client.client_name %></li>
+    <% end %>
   </ul>
-  <% else %>
-    <p>
-      No clients are assigned to this stylist.  Maybe we should fire them...
-    </p>
+<% else %>
+  <p>
+    No clients are assigned to this stylist.  Maybe we should fire them...
+  </p>
 <% end %>
+
+
+
+
+<p>Would you like to do any of the following?</p>
+
+<p>Update <%= @stylist.stylist_name %>'s name</p>
+<form action = '/stylist/<%= @stylist.id %>' method="post">
+  <input name="_method" type="hidden" value="patch">
+  <input name="stylist_id" id="stylist_id" type="hidden" value="<%= @stylist.id %>">
+  <div class="form-group">
+    <input id="name" name="name" type="text">
+  </div>
+  <button type="submit" class="btn-success">Update Name</button>
+</form>
+<p></p>
+<p>OR</p>
+
+<a href="/stylist/assign_client">Assign them a client</a>
+
+<p></p>
+<p>OR</p>
+<form action ='/stylists' method="post">
+  <input name="_method" type="hidden" value="delete">
+  <input name="stylist_id" id="stylist_id" type="hidden" value="<%= @stylist.id()%>">
+  <button class="btn-danger" type="submit">Delete <%= @stylist.stylist_name %></a></button>
+</form>

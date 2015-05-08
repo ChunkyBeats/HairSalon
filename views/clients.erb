@@ -4,7 +4,7 @@
   <h3>Clients:</h3>
   <ul>
       <% @clients.each do |client| %>
-        <li><a href="/clients/<%= client.id %>"> <%= client.client_name %> </a></li>
+        <li><a href="/client/<%= client.id %>"> <%= client.client_name %> </a></li>
       <% end %>
   </ul>
   <% else %>

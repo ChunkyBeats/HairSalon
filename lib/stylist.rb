@@ -34,7 +34,8 @@ class Stylist
   end
 
   def ==(another_stylist)
-    self.stylist_name.==(another_stylist.stylist_name).&(self.id.==(another_stylist.id))
+    self.stylist_name == another_stylist.stylist_name
+    # self.stylist_name.==(another_stylist.stylist_name).&(self.id.==(another_stylist.id))
   end
 
   def delete
@@ -47,15 +48,26 @@ class Stylist
     DB.exec("UPDATE stylists set stylist_name = '#{@stylist_name}' WHERE id = #{@id};")
   end
 
+  # def clients                     ORIGINAL CLIENT METHOD
+  #   client_array = []
+  #   results = DB.exec("SELECT * FROM clients WHERE stylist_id = #{self.id};")
+  #   results.each do |client|
+  #     client_name = client.fetch("client_name")
+  #     stylist_id = client.fetch("stylist_id").to_i
+  #     client_array.push(Client.new(client_name: client_name, stylist_id: stylist_id))
+  #   end
+  #   client_array
+  # end
+
   def clients
     client_array = []
     results = DB.exec("SELECT * FROM clients WHERE stylist_id = #{self.id};")
     results.each do |client|
       client_name = client.fetch("client_name")
-      stylist_id = client.fetch("stylist_id").to_i
-      client_array.push(Client.new(client_name: client_name, stylist_id: stylist_id))
+      client_array.push(client_name)
     end
     client_array
   end
+
 
 end
