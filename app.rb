@@ -67,6 +67,12 @@ patch('/client/:id') do
   erb(:client)
 end
 
+patch('/client/assign') do #NOT FINISHED -> STILL UPDATES NAME
+  @client = Client.find(params.fetch('id').to_i)
+  stylist = params.fetch("stylist")
+  @client.assign_stylist(stylist)
+end
+
 patch('/stylist/:id') do
   @stylist = Stylist.find(params.fetch('id').to_i)
   name = params.fetch("name")
