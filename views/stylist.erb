@@ -1,0 +1,13 @@
+<h3><%= #{@stylist.stylist_name} %> has these clients:</h3>
+
+<% if @stylists.clients.any? %>
+  <ul>
+      <% @stylist.clients.each do |clientt| %>
+        <li><%= client.client_name %></li>
+      <% end %>
+  </ul>
+  <% else %>
+    <p>
+      No clients are assigned to this stylist.  Maybe we should fire them...
+    </p>
+<% end %>

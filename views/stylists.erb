@@ -1,0 +1,14 @@
+<h1>Current Stylists</h1>
+
+<% if @stylists.any? %>
+  <h3>Stylists:</h3>
+  <ul>
+      <% @stylists.each do |stylist| %>
+        <li><a href="/stylist/<%= stylist.id %>"> <%= stylist.stylist_name %> </a></li>
+      <% end %>
+  </ul>
+  <% else %>
+    <p>
+      No stylists are currently employed. You should hire some!
+    </p>
+<% end %>

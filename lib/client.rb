@@ -18,7 +18,7 @@ class Client
     end
     returned_clients
   end
-
+  
   def save
     client = DB.exec("INSERT INTO clients (client_name) VALUES ('#{@client_name}') RETURNING id;")
     @id = client.first.fetch("id").to_i

@@ -18,6 +18,16 @@ class Stylist
     returned_stylists
   end
 
+  def self.find(id)
+    found_stylist = nil
+    Stylist.all.each do |stylist|
+      if stylist.id.==(id)
+        found_stylist = stylist
+      end
+    end
+    found_stylist
+  end
+
   def save
     stylist = DB.exec("INSERT INTO stylists (stylist_name) VALUES ('#{@stylist_name}') RETURNING id;")
     @id = stylist.first.fetch("id").to_i
@@ -39,10 +49,11 @@ class Stylist
 
   def clients
     client_array = []
-    results = DB.exec("SELECT client_name FROM clients WHERE stylist_id = #{self.id};")
+    results = DB.exec("SELECT * FROM clients WHERE stylist_id = #{self.id};")
     results.each do |client|
-      client_name = client['client_name']
-      client_array.push(client_name)
+      client_name = client.fetch("client_name")
+      stylist_id = client.fetch("stylist_id")
+      client_array.push(Client.new(client_name: client_name, stylist_id: stylist_id))
     end
     client_array
   end

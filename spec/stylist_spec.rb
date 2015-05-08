@@ -14,6 +14,16 @@ describe Stylist do
     end
   end
 
+  describe(".find") do
+    it('returns a stylist by their ID') do
+      stylist = Stylist.new(stylist_name: "Daffy")
+      stylist.save
+      stylist2 = Stylist.new(stylist_name: "Bugs")
+      stylist2.save
+      expect(Stylist.find(stylist2.id)).to(eq(stylist2))
+    end
+  end
+
   describe ('#save') do
     it('stores a stylist to the database') do
       test_stylist = Stylist.new(stylist_name: "Babs Bunny")
@@ -57,7 +67,7 @@ describe Stylist do
       stylist = Stylist.new(stylist_name: "Snip Snip")
       stylist.save
       client.assign_stylist(stylist)
-      expect(stylist.clients).to(eq([client.client_name]))
+      expect(stylist.clients).to(eq([client]))
     end
   end
 
