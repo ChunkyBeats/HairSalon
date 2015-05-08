@@ -52,7 +52,7 @@ class Stylist
     results = DB.exec("SELECT * FROM clients WHERE stylist_id = #{self.id};")
     results.each do |client|
       client_name = client.fetch("client_name")
-      stylist_id = client.fetch("stylist_id")
+      stylist_id = client.fetch("stylist_id").to_i
       client_array.push(Client.new(client_name: client_name, stylist_id: stylist_id))
     end
     client_array
