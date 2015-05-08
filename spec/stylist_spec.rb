@@ -50,4 +50,15 @@ describe Stylist do
     end
   end
 
+  describe('#clients') do
+    it('returns the list of clients assigned to a stylist') do
+      client = Client.new(client_name: "Anita Haircut")
+      client.save
+      stylist = Stylist.new(stylist_name: "Snip Snip")
+      stylist.save
+      client.assign_stylist(stylist)
+      expect(stylist.clients).to(eq([client.client_name]))
+    end
+  end
+
 end

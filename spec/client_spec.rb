@@ -50,4 +50,16 @@ describe Client do
     end
   end
 
+  # describe('#assign_stylist') do
+  #   it('assigns a stylist to a client') do
+  #     client = Client.new(client_name: "Sylvester")
+  #     client.save
+  #     stylist = Stylist.new(stylist_name: "Bugs Bunny")
+  #     stylist.save
+  #     client.assign_stylist(stylist)
+  #     expect(client.stylist_id).to(eq(stylist.id))
+  #   end
+  # end
+
+
 end

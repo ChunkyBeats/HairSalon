@@ -1,10 +1,11 @@
 class Client
   attr_reader :client_name
-  attr_accessor :id
+  attr_accessor :id, :stylist_id
 
   def initialize(attributes)
     @client_name = attributes[:client_name]
     @id = attributes[:id]
+    @stylist_id = attributes[:stylist_id]
   end
 
   def self.all
@@ -35,6 +36,18 @@ class Client
     @client_name = attributes[:client_name]
     @id = self.id
     DB.exec("UPDATE clients set client_name = '#{@client_name}' WHERE id = #{@id};")
+  end
+
+  def assign_stylist(stylist)
+    styler_name = stylist.stylist_name
+    returned_results = DB.exec("SELECT id FROM stylists WHERE stylist_name = '#{styler_name}';")
+    stylist_ids = []
+    returned_results.each() do |id|
+      style_id = id.fetch("id").to_i
+      stylist_ids.push(style_id)
+    end
+    id_of_stylist = stylist_ids.first.to_i
+    DB.exec("UPDATE clients SET stylist_id = (#{id_of_stylist}) WHERE client_name = ('#{self.client_name}');")
   end
 
 end

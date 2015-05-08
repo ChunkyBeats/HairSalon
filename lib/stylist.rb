@@ -37,4 +37,14 @@ class Stylist
     DB.exec("UPDATE stylists set stylist_name = '#{@stylist_name}' WHERE id = #{@id};")
   end
 
+  def clients
+    client_array = []
+    results = DB.exec("SELECT client_name FROM clients WHERE stylist_id = #{self.id};")
+    results.each do |client|
+      client_name = client['client_name']
+      client_array.push(client_name)
+    end
+    client_array
+  end
+
 end
